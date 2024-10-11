@@ -16,11 +16,11 @@ public class Hero {
     @Column(name = "hero_lastname")
     private String heroLastName;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "role_name_id", referencedColumnName = "role_name_id")
     private Role role;
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(
             name = "heroes_fractions",
             joinColumns = @JoinColumn(name = "hero_id"),
