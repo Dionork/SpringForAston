@@ -1,8 +1,10 @@
 package ru.aston.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "heroes")
@@ -16,15 +18,17 @@ public class Hero {
     @Column(name = "hero_lastname")
     private String heroLastName;
 
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "role_name_id", referencedColumnName = "role_name_id")
+    @JsonIgnore
     private Role role;
 
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
             name = "heroes_fractions",
             joinColumns = @JoinColumn(name = "hero_id"),
             inverseJoinColumns = @JoinColumn(name = "fraction_id"))
+    @JsonIgnore
     private List<Fraction> fractions;
 
 
@@ -75,5 +79,29 @@ public class Hero {
 
     public void setFractions(List<Fraction> fractions) {
         this.fractions = fractions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hero hero = (Hero) o;
+        return Objects.equals(heroId, hero.heroId) && Objects.equals(heroName, hero.heroName) && Objects.equals(heroLastName, hero.heroLastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(heroId, heroName, heroLastName);
+    }
+
+    @Override
+    public String toString() {
+        return "Hero{" +
+               "heroId=" + heroId +
+               ", heroName='" + heroName + '\'' +
+               ", heroLastName='" + heroLastName + '\'' +
+               ", role=" + role +
+               ", fractions=" + fractions +
+               '}';
     }
 }

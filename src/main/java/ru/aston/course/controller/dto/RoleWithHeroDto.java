@@ -1,12 +1,18 @@
 package ru.aston.course.controller.dto;
 
-public class RoleDto {
+import ru.aston.course.model.Hero;
+
+import java.util.List;
+
+public class RoleWithHeroDto {
     private Long roleId;
     private String roleName;
+    private List<Hero> hero;
 
-    public RoleDto(Long roleId, String roleName) {
+    public RoleWithHeroDto(Long roleId, String roleName, List<Hero> hero) {
         this.roleId = roleId;
         this.roleName = roleName;
+        this.hero = hero;
     }
 
     public Long getRoleId() {
@@ -25,5 +31,11 @@ public class RoleDto {
         this.roleName = roleName;
     }
 
+    public List<Hero> getHeroes() {
+        return hero;
+    }
 
+    public void setHeroes(List<Hero> hero) {
+        this.hero = hero;
+    }
 }

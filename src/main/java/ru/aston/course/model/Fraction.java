@@ -3,6 +3,7 @@ package ru.aston.course.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "fractions")
@@ -15,7 +16,7 @@ public class Fraction {
     @Column(name = "fraction_name")
     private String fractionName;
 
-    @ManyToMany(mappedBy = "fractions")
+    @ManyToMany(mappedBy = "fractions", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Hero> heroes;
 
     public Fraction() {
@@ -48,6 +49,19 @@ public class Fraction {
 
     public void setHeroes(List<Hero> heroes) {
         this.heroes = heroes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fraction fraction = (Fraction) o;
+        return Objects.equals(fractionId, fraction.fractionId) && Objects.equals(fractionName, fraction.fractionName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fractionId, fractionName);
     }
 
     @Override

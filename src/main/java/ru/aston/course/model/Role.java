@@ -3,6 +3,7 @@ package ru.aston.course.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "roles")
@@ -13,7 +14,7 @@ public class Role {
     private Long roleId;
     @Column(name = "role_name")
     private String roleName;
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role",fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Hero> hero;
 
     public Role() {
@@ -46,6 +47,19 @@ public class Role {
 
     public void setHero(List<Hero> hero) {
         this.hero = hero;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(roleId, role.roleId) && Objects.equals(roleName, role.roleName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roleId, roleName);
     }
 
     @Override
