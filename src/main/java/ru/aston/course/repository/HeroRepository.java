@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface HeroRepository extends JpaRepository<Hero, Long>{
     List<Hero> findAll();
+    List<Hero> findAllByFractions_FractionId (Long id);
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.aston.course.controller.dto.HeroDto;
+import ru.aston.course.controller.dto.HeroWithFractionDto;
 import ru.aston.course.model.Hero;
 import ru.aston.course.service.HeroService;
 import ru.aston.course.service.RoleService;
@@ -26,4 +27,8 @@ public class HeroController {
         return heroService.findAll();
     }
 
+    @GetMapping("/fraction")
+    public List<HeroWithFractionDto> findHeroWithFraction() {
+        return heroService.findAllWithFraction();
+    }
 }

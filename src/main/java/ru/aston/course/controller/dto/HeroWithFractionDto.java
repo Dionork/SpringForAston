@@ -1,21 +1,22 @@
 package ru.aston.course.controller.dto;
 
-import ru.aston.course.model.Role;
+import ru.aston.course.model.Fraction;
 
+import java.util.List;
 
-public class HeroDto {
+public class HeroWithFractionDto {
     private Long heroId;
 
     private String heroName;
 
     private String heroLastName;
+    private List<Fraction> fractions;
 
-
-    public HeroDto(Long heroId, String heroName, String heroLastName) {
+    public HeroWithFractionDto(Long heroId, String heroName, String heroLastName, List<Fraction> fractions) {
         this.heroId = heroId;
         this.heroName = heroName;
         this.heroLastName = heroLastName;
-
+        this.fractions = fractions;
     }
 
     public Long getHeroId() {
@@ -42,4 +43,11 @@ public class HeroDto {
         this.heroLastName = heroLastName;
     }
 
+    public List<Fraction> getFractions() {
+        return fractions;
+    }
+
+    public void setFractions(List<Fraction> fractions) {
+        this.fractions = fractions;
+    }
 }

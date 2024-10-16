@@ -4,36 +4,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.course.controller.dto.HeroDto;
+import ru.aston.course.controller.dto.HeroWithFractionDto;
 import ru.aston.course.controller.mapper.HeroMapper;
+import ru.aston.course.model.Fraction;
 import ru.aston.course.model.Hero;
 import ru.aston.course.model.Role;
 import ru.aston.course.repository.HeroRepository;
 import ru.aston.course.repository.RoleRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
 public class HeroService {
     HeroRepository heroRepository;
-    RoleRepository roleRepository;
+
+
     @Autowired
-    public HeroService(HeroRepository heroRepository, RoleRepository roleRepository) {
+    public HeroService(HeroRepository heroRepository) {
         this.heroRepository = heroRepository;
-        this.roleRepository = roleRepository;
+
     }
+
     @Transactional(readOnly = true)
-    public List<HeroDto> findAll(){
+    public List<HeroDto> findAll() {
         List<Hero> heroes = heroRepository.findAll();
-        List<HeroDto> heroDtos = new ArrayList<>();
-
+        List<HeroDto> heroDtos = new ArrayList<>();//
         for (Hero hero : heroes) {
-            hero.setRole(roleRepository.findById(hero.getRole().getRoleId()).orElse(null));
-//          Optional<Role> role = roleRepository.findById(hero.getRole().getRoleId());
-             heroDtos.add(HeroMapper.INSTANCE.toDto(hero));
+            heroDtos.add(HeroMapper.INSTANCE.toDto(hero));
+        }
+        return heroDtos;
+    }
 
+    @Transactional(readOnly = true)
+    public List<HeroWithFractionDto> findAllWithFraction() {
+        List<Hero> heroes = heroRepository.findAll();
+        List<HeroWithFractionDto> heroDtos = new ArrayList<>();
+        for (Hero hero : heroes) {
+            heroDtos.add(HeroMapper.INSTANCE.toDtoWithFraction(hero));
         }
         return heroDtos;
     }

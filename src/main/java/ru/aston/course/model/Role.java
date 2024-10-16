@@ -1,5 +1,6 @@
 package ru.aston.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
     @OneToMany(mappedBy = "role",fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonIgnore
     private List<Hero> hero;
 
     public Role() {

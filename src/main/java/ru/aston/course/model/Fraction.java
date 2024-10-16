@@ -1,5 +1,6 @@
 package ru.aston.course.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class Fraction {
     private String fractionName;
 
     @ManyToMany(mappedBy = "fractions", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Hero> heroes;
 
     public Fraction() {
