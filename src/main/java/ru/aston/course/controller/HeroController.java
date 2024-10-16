@@ -1,10 +1,11 @@
 package ru.aston.course.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.aston.course.controller.dto.FractionDto;
 import ru.aston.course.controller.dto.HeroDto;
 import ru.aston.course.controller.dto.HeroWithFractionDto;
 import ru.aston.course.controller.dto.HeroWithRoleDto;
@@ -35,7 +36,38 @@ public class HeroController {
     }
 
     @GetMapping("/role")
-        public List<HeroWithRoleDto> findHeroWithRole() {
-            return heroService.findAllWithRole();
-        }
+    public List<HeroWithRoleDto> findHeroWithRole() {
+        return heroService.findAllWithRole();
+    }
+
+    @GetMapping("/{id}")
+    public HeroDto findById(@PathVariable Long id) {
+        return heroService.findById(id);
+    }
+
+    @PostMapping("/new")
+    public ResponseEntity<HeroDto> create(HttpServletRequest request) {
+        String name = request.getParameter("name");
+        String lastName = request.getParameter("lastName");
+        Long roleId = Long.parseLong(request.getParameter("roleId"));
+        Long fractionId = Long.parseLong(request.getParameter("fractionId"));
+        HeroDto heroDto = new HeroDto(null, name, lastName);
+        return new ResponseEntity<>(heroService.create(heroDto, roleId, fractionId), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<HeroDto> update(@PathVariable("id") Long id, HttpServletRequest request) {
+        String name = request.getParameter("name");
+        String lastName = request.getParameter("lastName");
+        Long roleId = Long.parseLong(request.getParameter("roleId"));
+        Long fractionId = Long.parseLong(request.getParameter("fractionId"));
+        HeroDto heroDto = new HeroDto(id, name, lastName);
+        return new ResponseEntity<>(heroService.create(heroDto, roleId, fractionId), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<HeroDto> delete(@PathVariable("id") Long id) {
+        heroService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

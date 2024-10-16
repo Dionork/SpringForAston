@@ -18,12 +18,12 @@ public class Hero {
     @Column(name = "hero_lastname")
     private String heroLastName;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_name_id", referencedColumnName = "role_name_id")
     @JsonIgnore
     private Role role;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "heroes_fractions",
             joinColumns = @JoinColumn(name = "hero_id"),
