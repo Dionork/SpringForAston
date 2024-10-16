@@ -9,5 +9,5 @@ import java.util.List;
 @Repository ("FractionRepository")
 public interface FractionRepository extends JpaRepository<Fraction, Long>{
     List<Fraction> findAll();
-
+    List<Fraction> findAllHeroesByFractionId(Long id);
 }

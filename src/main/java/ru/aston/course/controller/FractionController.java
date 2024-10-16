@@ -1,14 +1,12 @@
 package ru.aston.course.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.aston.course.controller.dto.FractionDto;
-import ru.aston.course.model.Fraction;
+import ru.aston.course.controller.dto.FractionWithHeroDto;
 import ru.aston.course.service.FractionService;
 
 import java.util.List;
@@ -48,5 +46,10 @@ public class FractionController {
     @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable("id") Long id) {
         fractionService.delete(id);
+    }
+
+    @GetMapping("/hero/{id}")
+       public List<FractionWithHeroDto> getFractionWithHero(@PathVariable("id") Long id) {
+        return fractionService.findHeroByFractionId(id);
     }
 }
