@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.aston.course.controller.dto.HeroDto;
 import ru.aston.course.controller.dto.HeroWithFractionDto;
+import ru.aston.course.controller.dto.HeroWithRoleDto;
 import ru.aston.course.controller.mapper.HeroMapper;
 import ru.aston.course.model.Fraction;
 import ru.aston.course.model.Hero;
@@ -42,6 +43,19 @@ public class HeroService {
         List<HeroWithFractionDto> heroDtos = new ArrayList<>();
         for (Hero hero : heroes) {
             heroDtos.add(HeroMapper.INSTANCE.toDtoWithFraction(hero));
+        }
+        return heroDtos;
+    }
+    @Transactional(readOnly = true)
+    public List<HeroWithRoleDto> findAllWithRole() {
+        List<Hero> heroes = heroRepository.findAll();
+        List<HeroWithRoleDto> heroDtos = new ArrayList<>();
+        for (Hero hero : heroes) {
+            List<Role> roles = new ArrayList<>();
+            roles.add(new Role(hero.getRole().getRoleId(),hero.getRole().getRoleName()));
+            HeroWithRoleDto heroDto = HeroMapper.INSTANCE.toDtoWithRole(hero);
+            heroDto.setRoles(roles);
+            heroDtos.add(heroDto);
         }
         return heroDtos;
     }

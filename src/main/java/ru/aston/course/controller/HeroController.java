@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.aston.course.controller.dto.HeroDto;
 import ru.aston.course.controller.dto.HeroWithFractionDto;
+import ru.aston.course.controller.dto.HeroWithRoleDto;
 import ru.aston.course.model.Hero;
 import ru.aston.course.service.HeroService;
 import ru.aston.course.service.RoleService;
@@ -22,6 +23,7 @@ public class HeroController {
     public HeroController(HeroService heroService) {
         this.heroService = heroService;
     }
+
     @GetMapping("/all")
     public List<HeroDto> findAll() {
         return heroService.findAll();
@@ -31,4 +33,9 @@ public class HeroController {
     public List<HeroWithFractionDto> findHeroWithFraction() {
         return heroService.findAllWithFraction();
     }
+
+    @GetMapping("/role")
+        public List<HeroWithRoleDto> findHeroWithRole() {
+            return heroService.findAllWithRole();
+        }
 }
