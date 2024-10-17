@@ -5,13 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.aston.course.controller.dto.FractionDto;
 import ru.aston.course.controller.dto.HeroDto;
 import ru.aston.course.controller.dto.HeroWithFractionDto;
 import ru.aston.course.controller.dto.HeroWithRoleDto;
-import ru.aston.course.model.Hero;
 import ru.aston.course.service.HeroService;
-import ru.aston.course.service.RoleService;
 
 import java.util.List;
 

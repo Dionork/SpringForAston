@@ -47,7 +47,7 @@ public HeroDtoTest(){
     }
     @Test
     void toModel() {
-    HeroDto heroDto = HeroMapper.INSTANCE.toDto(hero);
-    assertEquals(hero,HeroMapper.INSTANCE.toModel(heroDto));
+    HeroDto heroDtos = HeroMapper.INSTANCE.toDto(hero);
+    assertEquals(hero,HeroMapper.INSTANCE.toModel(heroDtos));
     }
 }

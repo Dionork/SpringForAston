@@ -1,7 +1,5 @@
 package ru.aston.course.model;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -10,7 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FractionTest {
-    private Fraction fraction;
+    private final Fraction fraction;
 
     FractionTest(){
         fraction = new Fraction(1L, "Fraction 1");
@@ -24,6 +22,7 @@ class FractionTest {
     @Test
     void setFractionId() {
     fraction.setFractionId(2L);
+    assertEquals(2L, fraction.getFractionId());
     }
 
     @Test
@@ -54,7 +53,7 @@ class FractionTest {
     @Test
     void setHeroes() {
         fraction.setHeroes(null);
-        assertEquals(null, fraction.getHeroes());
+        assertNull( fraction.getHeroes());
     }
 
     @Test
@@ -67,7 +66,7 @@ class FractionTest {
         fraction2.setFractionId(1L);
         fraction2.setFractionName("Fraction 1");
 
-        assertTrue(fraction1.equals(fraction2));
+        assertEquals(fraction1,fraction2);
     }
 
     @Test
@@ -85,10 +84,10 @@ class FractionTest {
 
     @Test
     void testToString() {
-        Fraction fraction = new Fraction();
-        fraction.setFractionId(1L);
-        fraction.setFractionName("Fraction 1");
+        Fraction fractions = new Fraction();
+        fractions.setFractionId(1L);
+        fractions.setFractionName("Fraction 1");
 
-        assertEquals("Fraction{fractionId=1, fractionName='Fraction 1'}", fraction.toString());
+        assertEquals("Fraction{fractionId=1, fractionName='Fraction 1'}", fractions.toString());
     }
 }

@@ -78,7 +78,7 @@ class RoleTest {
 
     @Test
     void testToString() {
-        Role role = new Role(1L, "admin");
-        assertEquals("Role{roleId=1, roleName='admin'}", role.toString());
+        Role roles = new Role(1L, "admin");
+        assertEquals("Role{roleId=1, roleName='admin'}", roles.toString());
     }
 }

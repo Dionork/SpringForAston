@@ -1,7 +1,6 @@
 package ru.aston.course.controller.dto;
 
 import org.junit.jupiter.api.Test;
-import org.mapstruct.Mapper;
 import ru.aston.course.controller.mapper.RoleMapper;
 import ru.aston.course.model.Hero;
 import ru.aston.course.model.Role;

@@ -36,7 +36,7 @@ class RoleDtoTest {
     }
     @Test
     void toModel() {
-       RoleDto roleDto = RoleMapper.INSTANCE.toDto(role);
-       assertEquals(role, RoleMapper.INSTANCE.toModel(roleDto));
+       RoleDto roleDtos = RoleMapper.INSTANCE.toDto(role);
+       assertEquals(role, RoleMapper.INSTANCE.toModel(roleDtos));
     }
 }
