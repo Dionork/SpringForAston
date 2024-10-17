@@ -1,7 +1,5 @@
 package ru.aston.course.controller.dto;
 
-import ru.aston.course.model.Role;
-
 
 public class HeroDto {
     private Long heroId;

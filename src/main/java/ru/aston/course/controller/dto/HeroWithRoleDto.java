@@ -3,7 +3,6 @@ package ru.aston.course.controller.dto;
 
 import ru.aston.course.model.Role;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HeroWithRoleDto {
@@ -12,7 +11,7 @@ public class HeroWithRoleDto {
     private String heroName;
 
     private String heroLastName;
-//    private Role role;
+
     private List<Role> roles;
 
     public HeroWithRoleDto(Long heroId, String heroName, String heroLastName,List<Role> roles) {

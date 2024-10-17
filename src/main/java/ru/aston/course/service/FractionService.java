@@ -39,22 +39,18 @@ public class FractionService {
         Optional<Fraction> fraction = fractionRepository.findById(id);
         return FractionMapper.INSTANCE.toDto(fraction.orElse(null));
     }
+
     public FractionDto save(FractionDto fractionDto) {
-       return FractionMapper.INSTANCE.toDto(fractionRepository
-               .save(FractionMapper.INSTANCE.toModel(fractionDto)));
+        return FractionMapper.INSTANCE.toDto(fractionRepository
+                .save(FractionMapper.INSTANCE.toModel(fractionDto)));
     }
-    @Transactional
-    public FractionDto update(Long id, String name) {
-        Fraction fraction = fractionRepository.findById(id).orElse(null);
-        fraction.setFractionName(name);
-        return FractionMapper.INSTANCE.toDto(fractionRepository.save(fraction));
-    }
+
     @Transactional
     public void delete(Long id) {
         fractionRepository.deleteById(id);
     }
 
-    @Transactional (readOnly = true)
+    @Transactional(readOnly = true)
     public List<FractionWithHeroDto> findHeroByFractionId(Long id) {
         List<Fraction> fractions = fractionRepository.findAllHeroesByFractionId(id);
         List<FractionWithHeroDto> fractionWithHeroDtos = new ArrayList<>();
